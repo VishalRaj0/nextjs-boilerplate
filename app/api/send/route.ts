@@ -13,7 +13,7 @@ export async function POST(req: Request) {
       to: ['thakurcmp1@gmail.com'],
       subject: 'New Contact Message',
       react: EmailTemplate({
-        firstName: fullname,
+        fullname,
         email,
         message,
       }) as React.ReactElement,
