@@ -1,3 +1,20 @@
+import { EmailTemplate } from '../../../components/email-template';
+import { Resend } from 'resend';
+import * as React from 'react';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  });
+}
+
 export async function POST(req: Request) {
   try {
     const { fullname, email, message } = await req.json();
