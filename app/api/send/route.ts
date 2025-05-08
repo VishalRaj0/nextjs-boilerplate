@@ -17,14 +17,13 @@ export async function OPTIONS() {
 
 export async function POST(req: Request) {
   try {
-    const { fullname, email, message } = await req.json();
+    const { subject, email, message } = await req.json();
 
     const { data, error } = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>',
-      to: ['thakurcmp1@gmail.com'],
-      subject: 'New Contact Message',
+      to: ['vishalraj0.work@gmail.com'],
+      subject: subject,
       react: EmailTemplate({
-        fullname,
         email,
         message,
       }) as React.ReactElement,
