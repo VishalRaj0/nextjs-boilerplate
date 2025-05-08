@@ -1,9 +1,3 @@
-import { EmailTemplate } from '../../../components/email-template';
-import { Resend } from 'resend';
-import * as React from 'react';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: Request) {
   try {
     const { fullname, email, message } = await req.json();
@@ -20,11 +14,26 @@ export async function POST(req: Request) {
     });
 
     if (error) {
-      return Response.json({ error }, { status: 500 });
+      return new Response(JSON.stringify({ error }), {
+        status: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      });
     }
 
-    return Response.json({ success: true, data });
+    return new Response(JSON.stringify({ success: true, data }), {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
   } catch (error) {
-    return Response.json({ error: 'Invalid request' }, { status: 400 });
+    return new Response(JSON.stringify({ error: 'Invalid request' }), {
+      status: 400,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
   }
 }
